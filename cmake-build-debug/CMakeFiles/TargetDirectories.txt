@@ -1,0 +1,3 @@
+C:/Users/skyvi/Desktop/DecisionMakingAHP/Decision-making-AHP/cmake-build-debug/CMakeFiles/Decision_making_AHP.dir
+C:/Users/skyvi/Desktop/DecisionMakingAHP/Decision-making-AHP/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/skyvi/Desktop/DecisionMakingAHP/Decision-making-AHP/cmake-build-debug/CMakeFiles/rebuild_cache.dir

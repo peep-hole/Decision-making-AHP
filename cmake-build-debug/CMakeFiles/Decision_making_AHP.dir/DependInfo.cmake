@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/skyvi/Desktop/DecisionMakingAHP/Decision-making-AHP/library.cpp" "C:/Users/skyvi/Desktop/DecisionMakingAHP/Decision-making-AHP/cmake-build-debug/CMakeFiles/Decision_making_AHP.dir/library.cpp.obj"
+  "C:/Users/skyvi/Desktop/DecisionMakingAHP/Decision-making-AHP/AHP.cpp" "C:/Users/skyvi/Desktop/DecisionMakingAHP/Decision-making-AHP/cmake-build-debug/CMakeFiles/Decision_making_AHP.dir/AHP.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

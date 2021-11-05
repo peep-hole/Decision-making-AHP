@@ -75,27 +75,27 @@ include CMakeFiles/Decision_making_AHP.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Decision_making_AHP.dir/flags.make
 
-CMakeFiles/Decision_making_AHP.dir/library.cpp.obj: CMakeFiles/Decision_making_AHP.dir/flags.make
-CMakeFiles/Decision_making_AHP.dir/library.cpp.obj: ../library.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\skyvi\Desktop\DecisionMakingAHP\Decision-making-AHP\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Decision_making_AHP.dir/library.cpp.obj"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Decision_making_AHP.dir\library.cpp.obj -c C:\Users\skyvi\Desktop\DecisionMakingAHP\Decision-making-AHP\library.cpp
+CMakeFiles/Decision_making_AHP.dir/AHP.cpp.obj: CMakeFiles/Decision_making_AHP.dir/flags.make
+CMakeFiles/Decision_making_AHP.dir/AHP.cpp.obj: ../AHP.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\skyvi\Desktop\DecisionMakingAHP\Decision-making-AHP\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Decision_making_AHP.dir/AHP.cpp.obj"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Decision_making_AHP.dir\AHP.cpp.obj -c C:\Users\skyvi\Desktop\DecisionMakingAHP\Decision-making-AHP\AHP.cpp
 
-CMakeFiles/Decision_making_AHP.dir/library.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Decision_making_AHP.dir/library.cpp.i"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\skyvi\Desktop\DecisionMakingAHP\Decision-making-AHP\library.cpp > CMakeFiles\Decision_making_AHP.dir\library.cpp.i
+CMakeFiles/Decision_making_AHP.dir/AHP.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Decision_making_AHP.dir/AHP.cpp.i"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\skyvi\Desktop\DecisionMakingAHP\Decision-making-AHP\AHP.cpp > CMakeFiles\Decision_making_AHP.dir\AHP.cpp.i
 
-CMakeFiles/Decision_making_AHP.dir/library.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Decision_making_AHP.dir/library.cpp.s"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\skyvi\Desktop\DecisionMakingAHP\Decision-making-AHP\library.cpp -o CMakeFiles\Decision_making_AHP.dir\library.cpp.s
+CMakeFiles/Decision_making_AHP.dir/AHP.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Decision_making_AHP.dir/AHP.cpp.s"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\skyvi\Desktop\DecisionMakingAHP\Decision-making-AHP\AHP.cpp -o CMakeFiles\Decision_making_AHP.dir\AHP.cpp.s
 
 # Object files for target Decision_making_AHP
 Decision_making_AHP_OBJECTS = \
-"CMakeFiles/Decision_making_AHP.dir/library.cpp.obj"
+"CMakeFiles/Decision_making_AHP.dir/AHP.cpp.obj"
 
 # External object files for target Decision_making_AHP
 Decision_making_AHP_EXTERNAL_OBJECTS =
 
-libDecision_making_AHP.a: CMakeFiles/Decision_making_AHP.dir/library.cpp.obj
+libDecision_making_AHP.a: CMakeFiles/Decision_making_AHP.dir/AHP.cpp.obj
 libDecision_making_AHP.a: CMakeFiles/Decision_making_AHP.dir/build.make
 libDecision_making_AHP.a: CMakeFiles/Decision_making_AHP.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\skyvi\Desktop\DecisionMakingAHP\Decision-making-AHP\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libDecision_making_AHP.a"

@@ -141,32 +141,32 @@ Decision_making_AHP/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Decision_making_AHP.dir\build.make CMakeFiles/Decision_making_AHP.dir/build
 .PHONY : Decision_making_AHP/fast
 
-library.obj: library.cpp.obj
+AHP.obj: AHP.cpp.obj
 
-.PHONY : library.obj
+.PHONY : AHP.obj
 
 # target to build an object file
-library.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Decision_making_AHP.dir\build.make CMakeFiles/Decision_making_AHP.dir/library.cpp.obj
-.PHONY : library.cpp.obj
+AHP.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Decision_making_AHP.dir\build.make CMakeFiles/Decision_making_AHP.dir/AHP.cpp.obj
+.PHONY : AHP.cpp.obj
 
-library.i: library.cpp.i
+AHP.i: AHP.cpp.i
 
-.PHONY : library.i
+.PHONY : AHP.i
 
 # target to preprocess a source file
-library.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Decision_making_AHP.dir\build.make CMakeFiles/Decision_making_AHP.dir/library.cpp.i
-.PHONY : library.cpp.i
+AHP.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Decision_making_AHP.dir\build.make CMakeFiles/Decision_making_AHP.dir/AHP.cpp.i
+.PHONY : AHP.cpp.i
 
-library.s: library.cpp.s
+AHP.s: AHP.cpp.s
 
-.PHONY : library.s
+.PHONY : AHP.s
 
 # target to generate assembly for a file
-library.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Decision_making_AHP.dir\build.make CMakeFiles/Decision_making_AHP.dir/library.cpp.s
-.PHONY : library.cpp.s
+AHP.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Decision_making_AHP.dir\build.make CMakeFiles/Decision_making_AHP.dir/AHP.cpp.s
+.PHONY : AHP.cpp.s
 
 # Help Target
 help:
@@ -177,9 +177,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Decision_making_AHP
-	@echo ... library.obj
-	@echo ... library.i
-	@echo ... library.s
+	@echo ... AHP.obj
+	@echo ... AHP.i
+	@echo ... AHP.s
 .PHONY : help
 
 

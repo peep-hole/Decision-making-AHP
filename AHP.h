@@ -1,0 +1,6 @@
+#ifndef DECISION_MAKING_AHP_AHP_H
+#define DECISION_MAKING_AHP_AHP_H
+
+void hello();
+
+#endif //DECISION_MAKING_AHP_AHP_H

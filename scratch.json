@@ -1,0 +1,52 @@
+{
+  "criteria": {
+    "education": {
+      "charisma": 2.0,
+      "experience": 0.5
+    },
+    "charisma": {
+      "experience": 0.2
+    },
+    "experience": {
+
+    }
+  },
+  "candidates": {
+    "education": {
+      "John": {
+        "Anna": 2.0,
+        "Anton": 1.0
+      },
+      "Anna": {
+        "Anton": 3.0
+      },
+      "Anton": {
+
+      }
+    },
+    "charisma": {
+      "John": {
+        "Anna": 2.0,
+        "Anton": 1.0
+      },
+      "Anna": {
+        "Anton": 3.0
+      },
+      "Anton": {
+
+      }
+    },
+    "experience": {
+      "John": {
+        "Anna": 2.0,
+        "Anton": 1.0
+      },
+      "Anna": {
+        "Anton": 3.0
+      },
+      "Anton": {
+
+      }
+    }
+  }
+}

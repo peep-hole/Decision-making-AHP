@@ -1,2 +1,2 @@
-C:\mingw64\bin\ar.exe qc libDecision_making_AHP.a CMakeFiles/Decision_making_AHP.dir/AHP.cpp.obj
-C:\mingw64\bin\ranlib.exe libDecision_making_AHP.a
+/usr/bin/ar qc libDecision_making_AHP.a CMakeFiles/Decision_making_AHP.dir/AHP.cpp.o
+/usr/bin/ranlib libDecision_making_AHP.a

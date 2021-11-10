@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Decision_making_AHP.dir/AHP.cpp.obj"
+  "CMakeFiles/Decision_making_AHP.dir/AHP.cpp.o"
   "libDecision_making_AHP.a"
   "libDecision_making_AHP.pdb"
 )

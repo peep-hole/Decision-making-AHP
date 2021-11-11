@@ -1,2 +1,0 @@
-/usr/bin/ar qc libDecision_making_AHP.a CMakeFiles/Decision_making_AHP.dir/AHP.cpp.o
-/usr/bin/ranlib libDecision_making_AHP.a

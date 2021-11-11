@@ -1,3 +1,0 @@
-/home/peephole/Desktop/AHP/Decision-making-AHP/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/peephole/Desktop/AHP/Decision-making-AHP/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/peephole/Desktop/AHP/Decision-making-AHP/cmake-build-debug/CMakeFiles/Decision_making_AHP.dir

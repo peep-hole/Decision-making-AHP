@@ -6,6 +6,8 @@ enable_testing()
 
 add_executable(Decision-making-AHP src/main.cpp)
 
+target_include_directories(Decision-making-AHP PUBLIC vendor)
+
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)

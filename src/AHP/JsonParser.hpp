@@ -14,7 +14,7 @@ namespace ahp {
         std::vector<std::vector<std::vector<float>>> people_comparison;
 
     public:
-        JsonContainer(const std::string& filename);
+        explicit JsonContainer(const std::string& filename);
     };
 
     void parse_json(const std::string& filename);

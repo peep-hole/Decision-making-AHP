@@ -3,6 +3,7 @@
 #include <json/json.hpp>
 
 #include "AHP/PriorityMatrix.hpp"
+#include "AHP/JsonParser.hpp"
 
 int main(int, char**) {
     ahp::PriorityMatrix mat(3);
@@ -13,5 +14,7 @@ int main(int, char**) {
     for(auto& it : mat.get_priorities()) {
         std::cout << it << ' ';
     }
+
+    ahp::parse_json("../res/scratch2.json");
 
 }

@@ -24,7 +24,6 @@ namespace ahp {
                 buffer[x] += matrix[y][x];
         }
 
-        
         std::vector<double> priorities(size, 0.0);
         for(size_t y = 0u; y<size; ++y) {
             for(size_t x = 0u; x<size; ++x)

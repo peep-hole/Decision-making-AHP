@@ -5,8 +5,8 @@
 namespace ahp {
     class PriorityMatrix {
     public:
-        PriorityMatrix(size_t size);
-        
+        explicit PriorityMatrix(size_t size);
+
         void set_relation(size_t a, size_t b, double value);
 
         std::vector<double> get_priorities() const;

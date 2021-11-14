@@ -8,8 +8,10 @@ set(SOURCES
     "src/main.cpp"
     "src/AHP/PriorityMatrix.cpp"
     "src/AHP/PriorityMatrix.hpp"
-    "src/AHP/AHP.hpp"
-    "src/AHP/AHP.cpp"
+    "src/AHP/AHPSolver.cpp"
+    "src/AHP/AHPSolver.hpp"
+    "src/AHP/JsonParser.cpp"
+    "src/AHP/JsonParser.hpp"
 )
 
 add_executable(Decision-making-AHP ${SOURCES})

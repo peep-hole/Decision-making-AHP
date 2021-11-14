@@ -4,7 +4,15 @@ project(Decision-making-AHP VERSION 0.1.0)
 include(CTest)
 enable_testing()
 
-add_executable(Decision-making-AHP src/main.cpp)
+set(SOURCES
+    "src/main.cpp"
+    "src/AHP/PriorityMatrix.cpp"
+    "src/AHP/PriorityMatrix.hpp"
+    "src/AHP/AHP.hpp"
+    "src/AHP/AHP.cpp"
+)
+
+add_executable(Decision-making-AHP ${SOURCES})
 
 target_include_directories(Decision-making-AHP PUBLIC vendor)
 

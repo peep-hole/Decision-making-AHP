@@ -7,16 +7,11 @@
 namespace ahp {
 
     class JsonContainer {
-    private:
-        std::vector<std::string> criteria;
-        std::vector<std::string> candidates;
-        std::vector<std::vector<float>> criteria_comparison;
-        std::vector<std::vector<std::vector<float>>> people_comparison;
-
     public:
         explicit JsonContainer(const std::string& filename);
+        std::vector<std::string> criteria;
+        std::vector<std::string> candidates;
+        std::vector<std::vector<double>> criteria_comparison;
+        std::vector<std::vector<std::vector<double>>> people_comparison;
     };
-
-    void parse_json(const std::string& filename);
-    
 }

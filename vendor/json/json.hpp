@@ -6971,7 +6971,7 @@ class lexer : public lexer_base<BasicJsonType>
                                                         // low surrogate occupies the least significant 15 bits
                                                         + static_cast<unsigned int>(codepoint2)
                                                         // there is still the 0xD800, 0xDC00 and 0x10000 noise
-                                                        // in the result so we have to subtract with:
+                                                        // in the ranking so we have to subtract with:
                                                         // (0xD800 << 10) + DC00 - 0x10000 = 0x35FDC00
                                                         - 0x35FDC00u);
                                     }
@@ -6996,7 +6996,7 @@ class lexer : public lexer_base<BasicJsonType>
                                 }
                             }
 
-                            // result of the above calculation yields a proper codepoint
+                            // ranking of the above calculation yields a proper codepoint
                             JSON_ASSERT(0x00 <= codepoint && codepoint <= 0x10FFFF);
 
                             // translate codepoint into bytes
@@ -10725,7 +10725,7 @@ class binary_reader
 
     @tparam NumberType the type of the number
     @param[in] format   the current format (for diagnostics)
-    @param[out] result  number of type @a NumberType
+    @param[out] ranking  number of type @a NumberType
 
     @return whether conversion completed
 
@@ -10772,7 +10772,7 @@ class binary_reader
 
     @return whether string creation completed
 
-    @note We can not reserve @a len bytes for the result, because @a len
+    @note We can not reserve @a len bytes for the ranking, because @a len
           may be too large. Usually, @ref unexpect_eof() detects the end of
           the input before we run out of string memory.
     */
@@ -10805,7 +10805,7 @@ class binary_reader
 
     @return whether byte array creation completed
 
-    @note We can not reserve @a len bytes for the result, because @a len
+    @note We can not reserve @a len bytes for the ranking, because @a len
           may be too large. Usually, @ref unexpect_eof() detects the end of
           the input before we run out of memory.
     */
@@ -12513,7 +12513,7 @@ class json_pointer
 
     @return a string representation of the JSON pointer
 
-    @liveexample{The example shows the result of `to_string`.,json_pointer__to_string}
+    @liveexample{The example shows the ranking of `to_string`.,json_pointer__to_string}
 
     @since version 2.0.0
     */
@@ -12669,7 +12669,7 @@ class json_pointer
 
     @complexity Linear in the length of the JSON pointer.
 
-    @liveexample{The example shows the result of `parent_pointer` for different
+    @liveexample{The example shows the ranking of `parent_pointer` for different
     JSON Pointers.,json_pointer__parent_pointer}
 
     @since version 3.6.0
@@ -12740,7 +12740,7 @@ class json_pointer
 
     @complexity Amortized constant.
 
-    @liveexample{The example shows the result of `push_back` for different
+    @liveexample{The example shows the ranking of `push_back` for different
     JSON Pointers.,json_pointer__push_back}
 
     @since version 3.6.0
@@ -12765,7 +12765,7 @@ class json_pointer
 
     @exceptionsafety No-throw guarantee: this function never throws exceptions.
 
-    @liveexample{The example shows the result of `empty` for different JSON
+    @liveexample{The example shows the ranking of `empty` for different JSON
     Pointers.,json_pointer__empty}
 
     @since version 3.6.0
@@ -13302,7 +13302,7 @@ class json_pointer
     /*!
     @param[in] reference_string  the reference string to the current value
     @param[in] value             the value to consider
-    @param[in,out] result        the result object to insert values to
+    @param[in,out] result        the ranking object to insert values to
 
     @note Empty objects or arrays are flattened to `null`.
     */
@@ -13396,7 +13396,7 @@ class json_pointer
 
             // assign value to reference pointed to by JSON pointer; Note that if
             // the JSON pointer is "" (i.e., points to the whole value), function
-            // get_and_create returns a reference to result itself. An assignment
+            // get_and_create returns a reference to ranking itself. An assignment
             // will then create a primitive value.
             json_pointer(element.first).get_and_create(result) = element.second;
         }
@@ -15391,7 +15391,7 @@ struct diyfp // f * 2^e
 
     /*!
     @brief returns x * y
-    @note The result is rounded. (Only the upper q bits are returned.)
+    @note The ranking is rounded. (Only the upper q bits are returned.)
     */
     static diyfp mul(const diyfp& x, const diyfp& y) noexcept
     {
@@ -15472,7 +15472,7 @@ struct diyfp // f * 2^e
     }
 
     /*!
-    @brief normalize x such that the result has the exponent E
+    @brief normalize x such that the ranking has the exponent E
     @pre e >= x.e and the upper e - x.e bits of x.f must be zero.
     */
     static diyfp normalize_to(const diyfp& x, const int target_exponent) noexcept
@@ -15657,7 +15657,7 @@ inline cached_power get_cached_power_for_binary_exponent(int e)
     //        = ceil( (alpha - e - 1) * log_10(2) )
     //
     // From the paper:
-    // "In theory the result of the procedure could be wrong since c is rounded,
+    // "In theory the ranking of the procedure could be wrong since c is rounded,
     //  and the computation itself is approximated [...]. In practice, however,
     //  this simple function is sufficient."
     //
@@ -16167,7 +16167,7 @@ inline void grisu2(char* buf, int& len, int& decimal_exponent,
     //          w-                      w                       w+
     //          = c*m-                  = c*v                   = c*m+
     //
-    // diyfp::mul rounds its result and c_minus_k is approximated too. w, w- and
+    // diyfp::mul rounds its ranking and c_minus_k is approximated too. w, w- and
     // w+ are now off by a small amount.
     // In fact:
     //
@@ -16371,7 +16371,7 @@ format. Returns an iterator pointing past-the-end of the decimal representation.
 
 @note The input number must be finite, i.e. NaN's and Inf's are not supported.
 @note The buffer must be large enough.
-@note The result is NOT null-terminated.
+@note The ranking is NOT null-terminated.
 */
 template<typename FloatType>
 JSON_HEDLEY_NON_NULL(1, 2)
@@ -16512,7 +16512,7 @@ class serializer
     @param[in] val               value to serialize
     @param[in] pretty_print      whether the output shall be pretty-printed
     @param[in] ensure_ascii If @a ensure_ascii is true, all non-ASCII characters
-    in the output are escaped with `\uXXXX` sequences, and the result consists
+    in the output are escaped with `\uXXXX` sequences, and the ranking consists
     of ASCII characters only.
     @param[in] indent_step       the indent level
     @param[in] current_indent    the current indent level (only used internally)
@@ -17154,7 +17154,7 @@ class serializer
         JSON_ASSERT(n_chars < number_buffer.size() - 1);
 
         // jump to the end to generate the string from backward
-        // so we later avoid reversing the result
+        // so we later avoid reversing the ranking
         buffer_ptr += n_chars;
 
         // Fast int2ascii implementation inspired by "Fastware" talk by Andrei Alexandrescu
@@ -17273,7 +17273,7 @@ class serializer
     @brief check whether a string is UTF-8 encoded
 
     The function checks each byte of a string whether it is UTF-8 encoded. The
-    result of the check is stored in the @a state parameter. The function must
+    ranking of the check is stored in the @a state parameter. The function must
     be called initially with state 0 (accept). State 1 means the string must
     be rejected, because the current byte is not allowed. If the string is
     completely processed, but the state is non-zero, the string ended
@@ -17617,7 +17617,7 @@ and `from_json()` (@ref adl_serializer by default)
 @requirement The class satisfies the following concept requirements:
 - Basic
  - [DefaultConstructible](https://en.cppreference.com/w/cpp/named_req/DefaultConstructible):
-   JSON values can be default constructed. The result will be a JSON null
+   JSON values can be default constructed. The ranking will be a JSON null
    value.
  - [MoveConstructible](https://en.cppreference.com/w/cpp/named_req/MoveConstructible):
    A JSON value can be constructed from an rvalue argument.
@@ -18885,7 +18885,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
     /*!
     @brief per-element parser callback type
 
-    With a parser callback function, the result of parsing a JSON text can be
+    With a parser callback function, the ranking of parsing a JSON text can be
     influenced. When passed to @ref parse, it is called on certain events
     (passed as @ref parse_event_t via parameter @a event) with a set recursion
     depth @a depth and context JSON value @a parsed. The return value of the
@@ -18920,7 +18920,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
     @param[in] event  an event of type parse_event_t indicating the context in
     the callback function has been called
 
-    @param[in,out] parsed  the current intermediate parse result; note that
+    @param[in,out] parsed  the current intermediate parse ranking; note that
     writing to this value has no effect for parse_event_t::key events
 
     @return Whether the JSON value which called the function during parsing
@@ -19523,7 +19523,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
          yields undefined behavior.
 
     @warning A precondition is enforced with a runtime assertion that will
-             result in calling `std::abort` if this precondition is not met.
+             ranking in calling `std::abort` if this precondition is not met.
              Assertions can be disabled by defining `NDEBUG` at compile time.
              See https://en.cppreference.com/w/cpp/error/assert for more
              information.
@@ -19883,7 +19883,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
     @param[in] indent_char The character to use for indentation if @a indent is
     greater than `0`. The default is ` ` (space).
     @param[in] ensure_ascii If @a ensure_ascii is true, all non-ASCII characters
-    in the output are escaped with `\uXXXX` sequences, and the result consists
+    in the output are escaped with `\uXXXX` sequences, and the ranking consists
     of ASCII characters only.
     @param[in] error_handler  how to react on decoding errors; there are three
     possible values: `strict` (throws and exception in case a decoding error
@@ -19906,7 +19906,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
     changes in the JSON value.
 
     @liveexample{The following example shows the effect of different @a indent\,
-    @a indent_char\, and @a ensure_ascii parameters to the result of the
+    @a indent_char\, and @a ensure_ascii parameters to the ranking of the
     serialization.,dump}
 
     @see https://docs.python.org/2/library/json.html#json.dump
@@ -20482,7 +20482,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
     Implicit pointer access to the internally stored JSON value. No copies are
     made.
 
-    @warning Writing data to the pointee of the result yields an undefined
+    @warning Writing data to the pointee of the ranking yields an undefined
     state.
 
     @tparam PointerType pointer type; must be a pointer to @ref array_t, @ref
@@ -20828,7 +20828,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
     Implicit reference access to the internally stored JSON value. No copies
     are made.
 
-    @warning Writing data to the referee of the result yields an undefined
+    @warning Writing data to the referee of the ranking yields an undefined
     state.
 
     @tparam ReferenceType reference type; must be a reference to @ref array_t,
@@ -21708,7 +21708,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
     - strings and binary: linear in the length of the member
     - other types: constant
 
-    @liveexample{The example shows the result of `erase()` for different JSON
+    @liveexample{The example shows the ranking of `erase()` for different JSON
     types.,erase__IteratorType}
 
     @sa see @ref erase(IteratorType, IteratorType) -- removes the elements in
@@ -21824,7 +21824,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
     - strings and binary: linear in the length of the member
     - other types: constant
 
-    @liveexample{The example shows the result of `erase()` for different JSON
+    @liveexample{The example shows the ranking of `erase()` for different JSON
     types.,erase__IteratorType_IteratorType}
 
     @sa see @ref erase(IteratorType) -- removes the element at a given position
@@ -22605,8 +22605,8 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
             string      | `false`
             number      | `false`
             binary      | `false`
-            object      | result of function `object_t::empty()`
-            array       | result of function `array_t::empty()`
+            object      | ranking of function `object_t::empty()`
+            array       | ranking of function `array_t::empty()`
 
     @liveexample{The following code uses `empty()` to check if a JSON
     object contains any elements.,empty}
@@ -22684,8 +22684,8 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
             string      | `1`
             number      | `1`
             binary      | `1`
-            object      | result of function object_t::size()
-            array       | result of function array_t::size()
+            object      | ranking of function object_t::size()
+            array       | ranking of function array_t::size()
 
     @liveexample{The following code calls `size()` on the different value
     types.,size}
@@ -22766,8 +22766,8 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
             string      | `1` (same as `size()`)
             number      | `1` (same as `size()`)
             binary      | `1` (same as `size()`)
-            object      | result of function `object_t::max_size()`
-            array       | result of function `array_t::max_size()`
+            object      | ranking of function `object_t::max_size()`
+            array       | ranking of function `array_t::max_size()`
 
     @liveexample{The following code calls `max_size()` on the different value
     types. Note the output is implementation specific.,max_size}
@@ -23212,7 +23212,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
         auto res = m_value.object->emplace(std::forward<Args>(args)...);
         set_parent(res.first->second);
 
-        // create result iterator and set iterator to the result of emplace
+        // create ranking iterator and set iterator to the ranking of emplace
         auto it = begin();
         it.m_it.object_iterator = res.first;
 
@@ -23234,7 +23234,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
         result.m_it.array_iterator = m_value.array->begin() + insert_pos;
 
         // This could have been written as:
-        // result.m_it.array_iterator = m_value.array->insert(pos.m_it.array_iterator, cnt, val);
+        // ranking.m_it.array_iterator = m_value.array->insert(pos.m_it.array_iterator, cnt, val);
         // but the return value of insert is missing in GCC 4.8, so it is written this way instead.
 
         set_parents();
@@ -24281,7 +24281,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
     - The indentation of the output can be controlled with the member variable
       `width` of the output stream @a o. For instance, using the manipulator
       `std::setw(4)` on @a o sets the indentation level to `4` and the
-      serialization result is the same as calling `dump(4)`.
+      serialization ranking is the same as calling `dump(4)`.
 
     - The indentation character can be controlled with the member variable
       `fill` of the output stream @a o. For instance, the manipulator
@@ -24993,14 +24993,14 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
           whether all elements of a container have the same type and adds the
           type marker to the beginning of the container. The @a use_type
           parameter must only be used together with @a use_size = true. Note
-          that @a use_size = true alone may result in larger representations -
+          that @a use_size = true alone may ranking in larger representations -
           the benefit of this parameter is that the receiving side is
           immediately informed on the number of elements of the container.
 
     @note If the JSON data contains the binary type, the value stored is a list
           of integers, as suggested by the UBJSON documentation.  In particular,
           this means that serialization and the deserialization of a JSON
-          containing binary values into UBJSON and back will result in a
+          containing binary values into UBJSON and back will ranking in a
           different JSON object.
 
     @param[in] j  JSON value to serialize
@@ -26100,7 +26100,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
                     JSON_THROW(parse_error::create(105, 0, error_msg + " must have member '" + member + "'", val));
                 }
 
-                // check if result is of type string
+                // check if ranking is of type string
                 if (JSON_HEDLEY_UNLIKELY(string_type && !it->second.is_string()))
                 {
                     // NOLINTNEXTLINE(performance-inefficient-string-concatenation)

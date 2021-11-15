@@ -3,11 +3,6 @@
 using json = nlohmann::json;
 
 namespace ahp {
-    void parse_json(const std::string& filename) {
-
-
-
-    }
 
     JsonContainer::JsonContainer(const std::string &filename) {
         std::ifstream reader(filename);
@@ -23,10 +18,10 @@ namespace ahp {
             criteria[i] = j["criteria"][i];
         }
 
-        criteria_comparison = std::vector<std::vector<float>>(criteria_count, std::vector<float>(criteria_count));
+        criteria_comparison = std::vector<std::vector<double>>(criteria_count, std::vector<double>(criteria_count));
 
         for (int i = 0; i < criteria_count; ++i) {
-            for (int k = 0; j < criteria_count; ++k) {
+            for (int k = 0; k < criteria_count; ++k) {
                 criteria_comparison[i][k] = j["criteria_comparison"][i][k];
             }
         }
@@ -39,9 +34,9 @@ namespace ahp {
             candidates[i] = j["candidates"][i];
         }
 
-        people_comparison = std::vector<std::vector<std::vector<float>>>(criteria_count,
-                                                                       std::vector<std::vector<float>>(candidates_count,
-                                                                       std::vector<float>(candidates_count)));
+        people_comparison = std::vector<std::vector<std::vector<double>>>(criteria_count,
+                                                                       std::vector<std::vector<double>>(candidates_count,
+                                                                       std::vector<double>(candidates_count)));
 
         for (int c = 0; c < criteria_count; ++c) {
             for (int i = 0; i < candidates_count; ++i) {
@@ -50,5 +45,7 @@ namespace ahp {
                 }
             }
         }
+
+
     }
 }

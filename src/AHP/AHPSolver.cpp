@@ -13,8 +13,8 @@ namespace ahp {
 
         PriorityMatrix criteria_relations(criteria_size);
 
-        for (int i = 1; i < criteria_size; ++i) {
-            for (int k = i; k < criteria_size; ++k) {
+        for (int i = 0; i < criteria_size; ++i) {
+            for (int k = i+1; k < criteria_size; ++k) {
                 criteria_relations.set_relation(i, k, container.criteria_comparison[i][k]);
             }
         }
@@ -30,8 +30,8 @@ namespace ahp {
         std::vector<PriorityMatrix> candidates_per_criteria_relation(criteria_size, PriorityMatrix(candidates_size));
 
         for (int c = 0; c < criteria_size; ++c) {
-            for (int i = 1; i < candidates_size; ++i) {
-                for (int k = i; k < candidates_size; ++k) {
+            for (int i = 0; i < candidates_size; ++i) {
+                for (int k = i + 1; k < candidates_size; ++k) {
                     candidates_per_criteria_relation[c].set_relation(i, k, container.people_comparison[c][i][k]);
                 }
             }

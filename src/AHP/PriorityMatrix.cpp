@@ -1,7 +1,7 @@
 #include "PriorityMatrix.hpp"
 
 #include <stdexcept>
-#include <iostream>
+#include <cmath>
 
 namespace ahp {
     PriorityMatrix::PriorityMatrix(size_t size) :
@@ -24,14 +24,9 @@ namespace ahp {
         matrix(b, a) = 1.0/value;
     }
 
-    std::vector<double> PriorityMatrix::get_priorities() const {
-
+    std::vector<double> PriorityMatrix::get_priorities_EVM() const {
 
         std::vector<double> priorities(size, 0.0);
-
-        std::cout << "PRIORITIES: \n";
-        std::cout <<"MATRIX: \n" << matrix <<"\n";
-
 
         Eigen::EigenSolver<Eigen::MatrixXd> solver(matrix);
 
@@ -41,14 +36,9 @@ namespace ahp {
             priorities[x] = std::abs(solver.eigenvectors()(x, 0).real());
         }
 
-
-
         for (long x = 0; x < size; ++x) {
-            std::cout << priorities[x] << " | ";
             sum += priorities[x];
         }
-
-        std::cout << "\n_____________________________\n";
 
         for (long x = 0; x < size; ++x) {
             priorities[x] /= sum;
@@ -56,6 +46,26 @@ namespace ahp {
 
         return priorities;
 
-
     }
+
+    std::vector<double> PriorityMatrix::get_priorities_GMM() const {
+        std::vector<double> priorities(size, 1.0);
+
+        double sum = 0;
+
+        for (int y = 0; y < size; ++y) {
+            for (int x = 0; x < size; ++x) {
+                priorities[y] *= matrix(y, x);
+            }
+            priorities[y] = std::pow(priorities[y], 1.0/(float)size);
+            sum += priorities[y];
+        }
+
+        for (int x = 0; x < size; ++x) {
+            priorities[x] /= sum;
+        }
+
+        return priorities;
+    }
+
 }

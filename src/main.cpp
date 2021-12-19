@@ -10,7 +10,7 @@ int main(int, char**) {
 
     ahp::AHPSolver solver(container);
 
-    ahp::ranking candidates_ranking = solver.getRanking();
+    ahp::ranking candidates_ranking = solver.getRanking(false);
 
     for (int i = 0; i < candidates_ranking.candidates.size(); ++i) {
         std::cout << candidates_ranking.candidates[i] << ": " << candidates_ranking.priorities[i] << std::endl;

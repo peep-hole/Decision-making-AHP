@@ -15,7 +15,7 @@ namespace ahp {
     class AHPSolver {
     public:
         explicit AHPSolver(JsonContainer container);
-        ranking getRanking();
+        ranking getRanking(bool isEVM);
     private:
 
 

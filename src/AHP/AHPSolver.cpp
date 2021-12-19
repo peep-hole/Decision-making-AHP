@@ -5,7 +5,7 @@
 namespace ahp {
     AHPSolver::AHPSolver(JsonContainer container) : container(std::move(container)){}
 
-    ranking AHPSolver::getRanking() {
+    ranking AHPSolver::getRanking(bool isEVM) {
 
         // criteria priorities
 
@@ -18,8 +18,13 @@ namespace ahp {
                 criteria_relations.set_relation(i, k, container.criteria_comparison[i][k]);
             }
         }
-
-        std::vector<double> criteria_priorities(criteria_relations.get_priorities());
+        std::vector<double> criteria_priorities;
+        if (isEVM) {
+            criteria_priorities = criteria_relations.get_priorities_EVM();
+        }
+        else {
+            criteria_priorities = criteria_relations.get_priorities_GMM();
+        }
 
         // per criteria candidates priorities
 
@@ -35,8 +40,12 @@ namespace ahp {
                     candidates_per_criteria_relation[c].set_relation(i, k, container.people_comparison[c][i][k]);
                 }
             }
-
-            candidates_per_criteria_priorities[c] = candidates_per_criteria_relation[c].get_priorities();
+            if (isEVM) {
+                candidates_per_criteria_priorities[c] = candidates_per_criteria_relation[c].get_priorities_EVM();
+            }
+            else {
+                candidates_per_criteria_priorities[c] = candidates_per_criteria_relation[c].get_priorities_GMM();
+            }
         }
 
 

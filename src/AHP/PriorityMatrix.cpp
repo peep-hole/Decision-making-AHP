@@ -2,6 +2,7 @@
 
 #include <stdexcept>
 #include <cmath>
+#include <iostream>
 
 namespace ahp {
     PriorityMatrix::PriorityMatrix(size_t size) :
@@ -11,7 +12,10 @@ namespace ahp {
 
         for (long x=0; x < size; ++x) {
             for (long  y=0; y < size; ++y) {
-                matrix(x, y) = 1;
+                if(x==y)
+                    matrix(x, y) = 1;
+                else
+                    matrix(x, y) = -1;
             }
         }
 
@@ -24,11 +28,42 @@ namespace ahp {
         matrix(b, a) = 1.0/value;
     }
 
+    Eigen::MatrixXd PriorityMatrix::fix_incompleteness_EVM() const {
+        Eigen::MatrixXd new_matrix(size, size);
+        for (long  y=0; y < size; ++y) {
+            int s = 0;
+            for (long x=0; x < size; ++x)
+                if(matrix(y, x) == -1)
+                    ++s;
+            for (long x=0; x < size; ++x) {
+                double new_value;
+                if(matrix(y, x) == -1 && x != y)
+                    new_value = 0.0;
+                else if(matrix(y, x) != -1 && x != y)
+                    new_value = matrix(y, x);
+                else
+                    new_value = s+1.0;
+                new_matrix(y,x) = new_value;
+            }
+        }
+        return new_matrix;
+    }
+
+    Eigen::MatrixXd PriorityMatrix::fix_incompleteness_GMM() const {
+        Eigen::MatrixXd new_matrix(size, size);
+        for (long x=0; x < size; ++x) {
+            for (long  y=0; y < size; ++y) {
+                new_matrix(x,y) = matrix(x,y) >= 0 ? matrix(x,y) : 1;
+            }
+        }
+        return new_matrix;
+    }
+
     std::vector<double> PriorityMatrix::get_priorities_EVM() const {
 
         std::vector<double> priorities(size, 0.0);
-
-        Eigen::EigenSolver<Eigen::MatrixXd> solver(matrix);
+        
+        Eigen::EigenSolver<Eigen::MatrixXd> solver(fix_incompleteness_EVM());
 
         double sum = 0;
 
@@ -51,11 +86,13 @@ namespace ahp {
     std::vector<double> PriorityMatrix::get_priorities_GMM() const {
         std::vector<double> priorities(size, 1.0);
 
+        Eigen::MatrixXd new_matrix = fix_incompleteness_GMM();
+
         double sum = 0;
 
         for (int y = 0; y < size; ++y) {
             for (int x = 0; x < size; ++x) {
-                priorities[y] *= matrix(y, x);
+                priorities[y] *= new_matrix(y, x);
             }
             priorities[y] = std::pow(priorities[y], 1.0/(float)size);
             sum += priorities[y];
@@ -66,6 +103,15 @@ namespace ahp {
         }
 
         return priorities;
+    }
+
+    void PriorityMatrix::print() {
+        for (int y = 0; y < size; ++y) {
+            for (int x = 0; x < size; ++x) {
+                std::cout << matrix(y,x) << '\t';
+            }
+            std::cout << '\n';
+        }
     }
 
 }

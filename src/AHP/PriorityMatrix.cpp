@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <cmath>
 #include <iostream>
+#include <random>
 
 namespace ahp {
     PriorityMatrix::PriorityMatrix(size_t size) :
@@ -64,6 +65,30 @@ namespace ahp {
         std::vector<double> priorities(size, 0.0);
         
         Eigen::EigenSolver<Eigen::MatrixXd> solver(fix_incompleteness_EVM());
+
+        double saaty_index = std::abs((std::abs(solver.eigenvalues()[0].real()) - (double)size)/((double)size - 1.0));
+
+        std::cout << "Saaty: \n" << saaty_index << "\n";
+
+
+        Eigen::MatrixXd ri(size, size);
+
+        std::random_device dev;
+        std::mt19937 rng(dev());
+        std::uniform_int_distribution<std::mt19937::result_type> dist6(1,10000);
+        for (int y = 0; y < size; ++y) {
+            for (int x = 0; x < size; ++x) {
+                ri(y, x) = (double)dist6(rng)/10000.0;
+            }
+        }
+
+        Eigen::EigenSolver<Eigen::MatrixXd> ri_solver(ri);
+
+        double ri_saaty_index = std::abs((std::abs(ri_solver.eigenvalues()[0].real()) - (double)size)/((double)size - 1.0));
+
+        double consistency_ratio = saaty_index / ri_saaty_index;
+
+        std::cout << "CR: " << consistency_ratio << "\n";
 
         double sum = 0;
 

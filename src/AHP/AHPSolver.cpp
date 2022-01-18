@@ -7,6 +7,11 @@ namespace ahp {
 
     ranking AHPSolver::getRanking(bool isEVM) {
 
+        ranking result; // ranking for final results
+        result.CRs = std::vector<double>();
+        result.saatyIndices = std::vector<double>();
+        result.matrixNames = std::vector<std::string>();
+
         // criteria priorities
 
         size_t criteria_size = container.criteria.size();
@@ -21,9 +26,17 @@ namespace ahp {
         std::vector<double> criteria_priorities;
         if (isEVM) {
             criteria_priorities = criteria_relations.get_priorities_EVM();
+
+            result.matrixNames.emplace_back("Criteria Comparision");
+            result.CRs.push_back(criteria_relations.getCr());
+            result.saatyIndices.push_back(criteria_relations.getSaatyIndex());
+            result.indicesAvailable = true;
+
         }
         else {
             criteria_priorities = criteria_relations.get_priorities_GMM();
+            result.indicesAvailable = false;
+
         }
 
         // per criteria candidates priorities
@@ -42,19 +55,25 @@ namespace ahp {
             }
             if (isEVM) {
                 candidates_per_criteria_priorities[c] = candidates_per_criteria_relation[c].get_priorities_EVM();
+                result.matrixNames.emplace_back("Candidates per " + container.criteria[c] + " comparison");
+                result.CRs.push_back(candidates_per_criteria_relation[c].getCr());
+                result.saatyIndices.push_back(candidates_per_criteria_relation[c].getSaatyIndex());
+                result.indicesAvailable = true;
+
             }
             else {
                 candidates_per_criteria_priorities[c] = candidates_per_criteria_relation[c].get_priorities_GMM();
+                result.indicesAvailable = false;
+
             }
         }
 
 
         // final ranking
 
-
-        ranking result;
         result.candidates = container.candidates;
         result.priorities = std::vector<double>(candidates_size);
+
 
 
         for (int c = 0; c < candidates_size; ++c) {
@@ -65,6 +84,43 @@ namespace ahp {
 
 
         return result;
+    }
+
+    void AHPSolver::printIndices(ranking candidates_ranking) {
+        if (candidates_ranking.indicesAvailable) {
+            for (int i = 0; i < candidates_ranking.matrixNames.size(); ++i) {
+                std::cout << candidates_ranking.matrixNames[i] << " CR: " << candidates_ranking.CRs[i] << ", Saaty: " <<
+                          candidates_ranking.saatyIndices[i] <<"\n";
+            }
+        }
+
+    }
+
+    ranking AHPSolver::getRankingFromManyExperts(const std::vector<ranking>& rankings) {
+
+        int rankingSize = rankings[0].priorities.size();
+
+        std::vector<double> finalRank(rankingSize, 0);
+
+        for (auto &rank : rankings) {
+            for (int i = 0; i < rankingSize; i++) {
+                finalRank[i] += rank.priorities[i];
+            }
+        }
+
+        for (int i = 0; i < rankingSize; i++) {
+            finalRank[i] /= (double)finalRank.size();
+        }
+
+        ranking newRanking;
+
+        newRanking.priorities = finalRank;
+        newRanking.candidates = rankings[0].candidates;
+        newRanking.indicesAvailable = false;
+
+        return newRanking;
+
+
     }
 
 }

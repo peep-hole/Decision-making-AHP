@@ -8,6 +8,10 @@
 namespace ahp {
     PriorityMatrix::PriorityMatrix(size_t size) :
     size(size),
+    CR(0),
+    saatyIndex(0),
+    isCalculated(false),
+    isEVM(true),
     matrix(size, size) //init 2d array with 1 in each element
     {
 
@@ -60,16 +64,13 @@ namespace ahp {
         return new_matrix;
     }
 
-    std::vector<double> PriorityMatrix::get_priorities_EVM() const {
+    std::vector<double> PriorityMatrix::get_priorities_EVM(){
 
         std::vector<double> priorities(size, 0.0);
         
         Eigen::EigenSolver<Eigen::MatrixXd> solver(fix_incompleteness_EVM());
 
-        double saaty_index = std::abs((std::abs(solver.eigenvalues()[0].real()) - (double)size)/((double)size - 1.0));
-
-        std::cout << "Saaty: \n" << saaty_index << "\n";
-
+        saatyIndex = std::abs((std::abs(solver.eigenvalues()[0].real()) - (double)size)/((double)size - 1.0));
 
         Eigen::MatrixXd ri(size, size);
 
@@ -86,9 +87,7 @@ namespace ahp {
 
         double ri_saaty_index = std::abs((std::abs(ri_solver.eigenvalues()[0].real()) - (double)size)/((double)size - 1.0));
 
-        double consistency_ratio = saaty_index / ri_saaty_index;
-
-        std::cout << "CR: " << consistency_ratio << "\n";
+        CR = saatyIndex / ri_saaty_index;
 
         double sum = 0;
 
@@ -104,11 +103,13 @@ namespace ahp {
             priorities[x] /= sum;
         }
 
+        isCalculated = true;
+
         return priorities;
 
     }
 
-    std::vector<double> PriorityMatrix::get_priorities_GMM() const {
+    std::vector<double> PriorityMatrix::get_priorities_GMM() const{
         std::vector<double> priorities(size, 1.0);
 
         Eigen::MatrixXd new_matrix = fix_incompleteness_GMM();
@@ -137,6 +138,29 @@ namespace ahp {
             }
             std::cout << '\n';
         }
+        isCalculated = true;
+        isEVM = false;
+
+    }
+
+    void PriorityMatrix::checkForIndex() const {
+        if (!isCalculated) {
+            throw std::runtime_error("To get inconsistency ratio or saaty's index, priorities need to be calculated first!\n");
+        }
+
+        if(!isEVM) {
+            throw std::runtime_error("Inconsistency ratio and saaty's index work with eigenvalue method only!");
+        }
+    }
+
+    double PriorityMatrix::getCr() const {
+        checkForIndex();
+        return CR;
+    }
+
+    double PriorityMatrix::getSaatyIndex() const {
+        checkForIndex();
+        return saatyIndex;
     }
 
 }
